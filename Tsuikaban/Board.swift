@@ -16,6 +16,13 @@ public enum Block {
     case Empty
 }
 
+public enum Direction {
+    case Up
+    case Right
+    case Down
+    case Left
+}
+
 public class Board {
     private var _size: (Int, Int)
     private var _board: [[Block]]
@@ -100,23 +107,76 @@ public class Board {
     public var blocks: [[Block]]{
         get { return self._board }
     }
-    public func dumpBoard() {
-        var dump = ""
-        for col in _board{
-            for cell in col {
-                switch cell {
-                case .Door:
-                    dump += "D"
-                case .Empty:
-                    dump += "."
-                case .Wall:
-                    dump += "#"
-                case .Block(_, _):
-                    dump += "B"
+    private func tryMove(coord: (Int, Int), to: Direction) -> Bool {
+        var finalPosition: (Int, Int) = coord
+        switch to {
+        case .Up:
+            finalPosition.0 -= 1
+        case .Right:
+            finalPosition.1 += 1
+        case .Down:
+            finalPosition.0 += 1
+        case .Left:
+            finalPosition.1 -= 1
+        }
+        if finalPosition.0 < 0 || finalPosition.1 < 0 || finalPosition.0 >= self.size.0 || finalPosition.1 >= self.size.1 {
+            return false
+        }
+        // If we're trying to move the player or a block
+        let moveBlock = coord != self._playerPosition
+        switch self._board[finalPosition.0][finalPosition.1] {
+        case .Empty:
+            if moveBlock {
+                let old = self._board[coord.0][coord.1]
+                self._board[coord.0][coord.1] = self._board[finalPosition.0][finalPosition.1]
+                self._board[finalPosition.0][finalPosition.1] = old
+            }
+            return true;
+        case .Wall:
+            return false;
+        case .Door:
+            // If we're trying to move a block over a door then forbid it!
+            return !moveBlock
+        case .Block(let colour, let value):
+            if moveBlock{
+                // If we're moving a block check if we can add it
+                switch self._board[coord.0][coord.1] {
+                case .Block(let currentColour, let currentValue):
+                    if colour == currentColour {
+                        // Sum the blocks
+                        self._board[coord.0][coord.1] = .Empty
+                        self._board[finalPosition.0][finalPosition.1] = .Block(colour, value + currentValue)
+                        return true
+                    }
+                default:
+                    break
                 }
             }
-            dump += "\n"
+            let canMove = self.tryMove(coord: finalPosition, to: to)
+            if canMove && moveBlock {
+                let old = self._board[coord.0][coord.1]
+                self._board[coord.0][coord.1] = self._board[finalPosition.0][finalPosition.1]
+                self._board[finalPosition.0][finalPosition.1] = old
+            }
+            return canMove
+        /*default:
+            #warning("This switch should be exhaustive!")
+            return false;*/
         }
-        print(dump)
+    }
+    public func move(_ direction: Direction) {
+        if !self.tryMove(coord: self.playerPosition, to: direction) {
+            return
+        }
+        switch direction {
+        case .Up:
+            self._playerPosition.0 -= 1
+        case .Right:
+            self._playerPosition.1 += 1
+        case .Down:
+            self._playerPosition.0 += 1
+        case .Left:
+            self._playerPosition.1 -= 1
+        }
     }
 }

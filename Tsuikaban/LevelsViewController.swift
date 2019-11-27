@@ -36,8 +36,6 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if cell.selectionStyle == .none {
             return;
         }
-        let level = cell.textLabel!.text!.components(separatedBy: " ")[1]
-        print(self.levels[indexPath.row])
         performSegue(withIdentifier: "toSpriteKitVC", sender: self.levels[indexPath.row])
     }
     
