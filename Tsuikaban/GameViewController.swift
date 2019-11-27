@@ -11,6 +11,7 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    public var level: Level? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +20,11 @@ class GameViewController: UIViewController {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
+                scene.size = UIScreen.main.bounds.size
+                scene.scaleMode = .aspectFit
                 // Present the scene
                 view.presentScene(scene)
+                (scene as! GameScene).initBoard(level: self.level!)
             }
             
             view.ignoresSiblingOrder = true
