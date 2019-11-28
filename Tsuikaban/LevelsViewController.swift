@@ -10,7 +10,31 @@ import Foundation
 import UIKit
 
 class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    private var levels: [Level] = Array(0...16).map{Level(unlocked: $0%2 == 0, name: "Level \($0)", path: "")}
+    private var levels: [Level] = { () -> [Level] in
+        let docsPath = Bundle.main.resourcePath! + "/levels"
+        let fileManager = FileManager.default
+
+        do {
+            let docsArray = try fileManager.contentsOfDirectory(atPath: docsPath)
+            
+            return docsArray
+                .filter { (filename: String) -> Bool in
+                    return filename.contains(".txt")
+                }
+                .sorted {
+                    let result: Bool = (Int($0.components(separatedBy: ".")[0].replacingOccurrences(of: "level", with: "")) ?? 0) < (Int ($1.components(separatedBy: ".")[0].replacingOccurrences(of: "level", with: "")) ?? 0)
+                    return result}
+                .map {(s: String) -> Level in
+                    Level(
+                    unlocked: true,
+                    name: "Level " + s.components(separatedBy: ".")[0].replacingOccurrences(of: "level", with: ""),
+                    path: Bundle.main.resourcePath! + "/levels/\(s)"
+                    )
+            }
+        } catch {
+            return []
+        }
+    }()
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.levels.count
@@ -44,6 +68,10 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     override func didReceiveMemoryWarning() {
         //<#code#>
+    }
+    @IBAction func unwindToLvlsLst(_ unwindSegue: UIStoryboardSegue) {
+        let _sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
     }
     
     @IBOutlet weak var levelsList: UITableView!

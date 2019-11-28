@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-public enum Block {
+public enum Block: Equatable {
     case Door
     case Wall
     case Block(SKColor, Int)
@@ -27,6 +27,8 @@ public class Board {
     private var _size: (Int, Int)
     private var _board: [[Block]]
     private var _playerPosition: (Int, Int)
+    private var _playerHasWon = false
+    private var snapshots: [((Int, Int), [[Block]])] = []
     
     convenience init(levelFilePath: String) {
         let levelData: String
@@ -101,6 +103,9 @@ public class Board {
     public var playerPosition: (Int, Int){
         get { return self._playerPosition }
     }
+    public var playerHasWon: Bool {
+        get { return self._playerHasWon }
+    }
     public var size: (Int, Int){
         get { return self._size }
     }
@@ -136,6 +141,7 @@ public class Board {
             return false;
         case .Door:
             // If we're trying to move a block over a door then forbid it!
+            self._playerHasWon = !moveBlock
             return !moveBlock
         case .Block(let colour, let value):
             if moveBlock{
@@ -143,9 +149,14 @@ public class Board {
                 switch self._board[coord.0][coord.1] {
                 case .Block(let currentColour, let currentValue):
                     if colour == currentColour {
-                        // Sum the blocks
                         self._board[coord.0][coord.1] = .Empty
-                        self._board[finalPosition.0][finalPosition.1] = .Block(colour, value + currentValue)
+                        if value + currentValue == 0 {
+                            // If the two blocks cancel each other
+                            self._board[finalPosition.0][finalPosition.1] = .Empty
+                        } else {
+                            // Sum the blocks
+                            self._board[finalPosition.0][finalPosition.1] = .Block(colour, value + currentValue)
+                        }
                         return true
                     }
                 default:
@@ -165,8 +176,13 @@ public class Board {
         }
     }
     public func move(_ direction: Direction) {
+        let snapshot = (self.playerPosition, self._board)
         if !self.tryMove(coord: self.playerPosition, to: direction) {
             return
+        }
+        if snapshot.1 != self._board {
+            // Save the snapshot
+            self.snapshots.append(snapshot)
         }
         switch direction {
         case .Up:
@@ -178,5 +194,17 @@ public class Board {
         case .Left:
             self._playerPosition.1 -= 1
         }
+    }
+    public func undo() {
+        if self.snapshots.count == 0 {
+            return
+        }
+        let snapshot = self.snapshots.popLast()!
+        self._playerPosition = snapshot.0
+        self._board = snapshot.1
+    }
+    public func clear() {
+        self._board = []
+        self.snapshots = []
     }
 }

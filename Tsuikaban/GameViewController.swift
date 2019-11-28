@@ -24,7 +24,7 @@ class GameViewController: UIViewController {
                 scene.scaleMode = .aspectFit
                 // Present the scene
                 view.presentScene(scene)
-                (scene as! GameScene).initBoard(level: self.level!)
+                (scene as! GameScene).initBoard(level: self.level!, vc: self)
             }
             
             view.ignoresSiblingOrder = true
