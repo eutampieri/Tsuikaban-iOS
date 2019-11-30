@@ -41,7 +41,7 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var board: Board! = nil
     private var ignoreGesture = false
-    private var parentVC: GameViewController! = nil
+    private weak var parentVC: GameViewController! = nil
     // When the drag began
     private var firstPoint: CGPoint! = nil
     
