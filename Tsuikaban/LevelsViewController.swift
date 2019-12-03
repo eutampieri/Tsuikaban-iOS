@@ -11,9 +11,9 @@ import UIKit
 
 class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private var levels: [Level] = { () -> [Level] in
+        let lastLevel = UserDefaults.standard.integer(forKey: "lastLevel")
         let docsPath = Bundle.main.resourcePath! + "/levels"
         let fileManager = FileManager.default
-
         do {
             let docsArray = try fileManager.contentsOfDirectory(atPath: docsPath)
             
@@ -26,7 +26,7 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     return result}
                 .map {(s: String) -> Level in
                     Level(
-                    unlocked: true,
+                    unlocked: Int(s.components(separatedBy: ".")[0].replacingOccurrences(of: "level", with: "")) ?? 0 <= lastLevel,
                     name: "Level " + s.components(separatedBy: ".")[0].replacingOccurrences(of: "level", with: ""),
                     path: Bundle.main.resourcePath! + "/levels/\(s)"
                     )
@@ -35,19 +35,38 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return []
         }
     }()
-
+    
+    public func enableLevel(level: Int) {
+        self.levels[level].unlocked = true;
+        let cell = self.levelsList.cellForRow(at: [0, level])!
+        cell.selectionStyle = .default
+        if #available(iOS 13.0, *) {
+            cell.textLabel?.textColor = .label
+        } else {
+            cell.textLabel?.textColor = .black
+        }
+        //self.levelsList.
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.levels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell! = self.levelsList.dequeueReusableCell(withIdentifier: "levelCell")
+        let cell: UITableViewCell! = self.levelsList.dequeueReusableCell(withIdentifier: "levelCell")
         if !self.levels[indexPath.row].unlocked {
             cell.selectionStyle = .none
             if #available(iOS 13.0, *) {
                 cell.textLabel?.textColor = .placeholderText
             } else {
                 cell.textLabel?.textColor = .lightGray
+            }
+        } else {
+            cell.selectionStyle = .default
+            if #available(iOS 13.0, *) {
+                cell.textLabel?.textColor = .label
+            } else {
+                cell.textLabel?.textColor = .black
             }
         }
         cell.textLabel?.text = self.levels[indexPath.row].name
@@ -60,6 +79,7 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if cell.selectionStyle == .none {
             return;
         }
+        self.levelsList.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "toSpriteKitVC", sender: self.levels[indexPath.row])
     }
     
@@ -70,7 +90,7 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //<#code#>
     }
     @IBAction func unwindToLvlsLst(_ unwindSegue: UIStoryboardSegue) {
-        let _sourceViewController = unwindSegue.source
+        _ = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
     }
     
@@ -80,4 +100,8 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.levelsList.register(UITableViewCell.self, forCellReuseIdentifier: "levelCell")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.levelsList.reloadData()
+        super.viewDidAppear(animated)
+    }
 }

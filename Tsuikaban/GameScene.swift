@@ -7,7 +7,6 @@
 //
 
 import SpriteKit
-import GameplayKit
 
 extension CGSize {
     public static func -(lhs:CGSize,rhs:CGSize) -> CGSize {
@@ -101,9 +100,9 @@ class GameScene: SKScene {
                         label.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1)
                         label.fontName = "Courier-Bold"
                         // Scale the font
-                        label.fontSize = label.fontSize/75.0*squareWidth
+                        label.fontSize = label.fontSize/80.0*squareWidth
                         label.position = nodePosition
-                        label.verticalAlignmentMode = .center
+                        label.verticalAlignmentMode = .bottom
                         label.zPosition = CGFloat(100)
                         let ground = SKSpriteNode(imageNamed: "ground");
                         ground.size = blockSize
@@ -114,8 +113,13 @@ class GameScene: SKScene {
                         node.texture = SKTexture(imageNamed: "cube")
                         node.colorBlendFactor = 0.8
                         node.position = nodePosition
+                        let eyes = SKSpriteNode(imageNamed: "eyes")
+                        eyes.size = blockSize
+                        eyes.position = nodePosition
+                        eyes.zPosition = 20
                         self.addChild(node)
                         self.addChild(label)
+                        self.addChild(eyes)
                     }
                 }
             }
@@ -160,7 +164,7 @@ class GameScene: SKScene {
             
         }
     }
-    
+        
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if self.ignoreGesture {
             self.ignoreGesture = false
@@ -174,17 +178,18 @@ class GameScene: SKScene {
         let delta = average - self.firstPoint
         let direction: Direction
         if abs(delta.x) > 10 || abs(delta.y) > 10 {
+            let tolerance = CGFloat.pi/6.0
             let alpha = atan2(delta.y, delta.x)
             switch alpha {
-            case -0.3...0.3:
+            case -tolerance...tolerance:
                 direction = .Right
-            case -1.8...(-1.2):
+            case (-1*CGFloat.pi/2.0)-tolerance...(-1*CGFloat.pi/2.0)+tolerance:
                 direction = .Down
-            case -3.2...(-2.9):
+            case CGFloat.pi-tolerance...CGFloat.pi:
                 direction = .Left
-            case 2.9...3.2:
+            case -CGFloat.pi ... -CGFloat.pi+tolerance:
                 direction = .Left
-            case 1.3...1.7:
+            case (CGFloat.pi/2.0)-tolerance...(CGFloat.pi/2.0)+tolerance:
                 direction = .Up
             default:
                 return
@@ -195,8 +200,11 @@ class GameScene: SKScene {
         self.board.move(direction)
         self.renderBoard()
         if self.board.playerHasWon {
+            let level = Int((self.label?.text)!.replacingOccurrences(of: "Level ", with: "")) ?? 0
+            UserDefaults.standard.set(max(UserDefaults.standard.integer(forKey: "lastLevel"), level+1), forKey: "lastLevel")
+            (self.parentVC.presentingViewController as! LevelsViewController).enableLevel(level: level+1)
             self.exit()
-            #warning("Level won logic is not implemented yet")
+            //#warning("Level won logic is not implemented yet")
         }
     }
     

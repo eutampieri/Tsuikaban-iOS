@@ -84,7 +84,7 @@ public class Board {
         }
         // Set the player position
         let playerPosArray = rows[_size.0 + 1].components(separatedBy: " ").map{Int($0)!}
-        _playerPosition = (playerPosArray[0], playerPosArray[1])
+        _playerPosition = (playerPosArray[1], playerPosArray[0])
         // Fill the blocks
         let numberOfBlocks = Int(rows[_size.0 + 2])!
         for i in 0..<numberOfBlocks {
@@ -170,9 +170,6 @@ public class Board {
                 self._board[finalPosition.0][finalPosition.1] = old
             }
             return canMove
-        /*default:
-            #warning("This switch should be exhaustive!")
-            return false;*/
         }
     }
     public func move(_ direction: Direction) {
