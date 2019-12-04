@@ -12,6 +12,9 @@ extension CGSize {
     public static func -(lhs:CGSize,rhs:CGSize) -> CGSize {
         return CGSize(width: lhs.width - rhs.width, height: lhs.height - rhs.height)
     }
+    public static func *(lhs: CGSize, rhs: Float) -> CGSize {
+        return CGSize(width: lhs.width*CGFloat(rhs), height: lhs.height*CGFloat(rhs))
+    }
     public static func /(lhs: CGSize, rhs: Float) -> CGSize {
         return CGSize(width: lhs.width/CGFloat(rhs), height: lhs.height/CGFloat(rhs))
     }
@@ -68,12 +71,12 @@ class GameScene: SKScene {
                     x: viewSize.width/CGFloat(-2.0) + (CGFloat(i)*squareWidth) + squareWidth/CGFloat(2.0) + offset.width,
                     y: viewSize.height/CGFloat(2.0) - (CGFloat(j)*squareWidth) - squareWidth/CGFloat(2.0) - offset.height
                 )
+                let ground = SKSpriteNode(imageNamed: "ground");
+                ground.size = blockSize
+                ground.position = nodePosition
+                ground.zPosition = CGFloat(-100)
+                self.addChild(ground)
                 if (j, i) == self.board!.playerPosition {
-                    let ground = SKSpriteNode(imageNamed: "ground");
-                    ground.size = blockSize
-                    ground.position = nodePosition
-                    ground.zPosition = CGFloat(-100)
-                    self.addChild(ground)
                     let node = SKSpriteNode(imageNamed: "player");
                     node.size = blockSize
                     node.position = nodePosition
@@ -91,27 +94,25 @@ class GameScene: SKScene {
                         node.position = nodePosition
                         self.addChild(node)
                     case .Empty:
-                        let node = SKSpriteNode(imageNamed: "ground");
-                        node.size = blockSize
-                        node.position = nodePosition
-                        self.addChild(node)
+                        break
                     case .Block(let colour, let content):
                         let label = SKLabelNode(text: String(content))
-                        label.fontColor = SKColor(red: 0, green: 0, blue: 0, alpha: 1)
+                        label.fontColor = {() -> SKColor in
+                            let brightness: CGFloat = {
+                                let c: [CGFloat] = colour.cgColor.components ?? [0.0, 0.0, 0.0]
+                                return c[0]*CGFloat(0.299) + c[1]*CGFloat(0.587) + c[2]*CGFloat(0.114)
+                            }()
+                            return brightness > 0.5 ? .black : .white
+                        }()
                         label.fontName = "Courier-Bold"
                         // Scale the font
                         label.fontSize = label.fontSize/80.0*squareWidth
                         label.position = nodePosition
                         label.verticalAlignmentMode = .bottom
                         label.zPosition = CGFloat(100)
-                        let ground = SKSpriteNode(imageNamed: "ground");
-                        ground.size = blockSize
-                        ground.position = nodePosition
-                        ground.zPosition = CGFloat(-100)
-                        self.addChild(ground)
-                        let node = SKSpriteNode(color: colour, size: blockSize)
-                        node.texture = SKTexture(imageNamed: "cube")
-                        node.colorBlendFactor = 0.8
+                        let node = SKShapeNode(rect: CGRect(origin: CGPoint(x: -squareWidth*0.45, y: -squareWidth*0.45), size: blockSize*0.9), cornerRadius: squareWidth*0.15)
+                        node.fillColor = colour
+                        node.strokeColor = label.fontColor!
                         node.position = nodePosition
                         let eyes = SKSpriteNode(imageNamed: "eyes")
                         eyes.size = blockSize
@@ -152,6 +153,7 @@ class GameScene: SKScene {
         average = average / numberOfTouches
         self.firstPoint = average
         let activeCornerSize = min(self.size.width, self.size.height)*0.1
+        let demo = self.size
         if average.x < self.size.width/(-2.0) + activeCornerSize && average.y > self.size.width/(2.0) - activeCornerSize {
             // Upper left active corner, undo
             self.ignoreGesture = true
