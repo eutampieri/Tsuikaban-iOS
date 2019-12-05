@@ -19,6 +19,17 @@
 		9E1AB291238E5B84008A2A0F /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1AB290238E5B84008A2A0F /* LevelsViewController.swift */; };
 		9E1AB293238E6E7D008A2A0F /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1AB292238E6E7D008A2A0F /* Level.swift */; };
 		9E1AB297238FBCBC008A2A0F /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 9E1AB296238FBCBC008A2A0F /* levels */; };
+		9EA71AA42398F7C000130AFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA71AA32398F7C000130AFB /* AppDelegate.swift */; };
+		9EA71AAF2398F7C100130AFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EA71AAD2398F7C100130AFB /* Main.storyboard */; };
+		9EA71AB42398F7C900130AFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EA71AB22398F7C900130AFB /* LaunchScreen.storyboard */; };
+		9EA71ABB2398F91700130AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EA71AB92398F91700130AFB /* Assets.xcassets */; };
+		9EA71ABC2398F91700130AFB /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 9EA71ABA2398F91700130AFB /* levels */; };
+		9EA71AC32398F96900130AFB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA71ABD2398F96800130AFB /* GameViewController.swift */; };
+		9EA71AC42398F96900130AFB /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA71ABE2398F96800130AFB /* Board.swift */; };
+		9EA71AC52398F96900130AFB /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA71ABF2398F96800130AFB /* Level.swift */; };
+		9EA71AC62398F96900130AFB /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA71AC02398F96900130AFB /* LevelsViewController.swift */; };
+		9EA71AC72398F96900130AFB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA71AC12398F96900130AFB /* GameScene.swift */; };
+		9EA71AC82398F96900130AFB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9EA71AC22398F96900130AFB /* GameScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,10 +47,30 @@
 		9E1AB290238E5B84008A2A0F /* LevelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsViewController.swift; sourceTree = "<group>"; };
 		9E1AB292238E6E7D008A2A0F /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		9E1AB296238FBCBC008A2A0F /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
+		9EA71AA12398F7C000130AFB /* Tsuikaban-TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tsuikaban-TV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EA71AA32398F7C000130AFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9EA71AAE2398F7C100130AFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9EA71AB32398F7C900130AFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9EA71AB52398F7C900130AFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EA71AB92398F91700130AFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Tsuikaban/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		9EA71ABA2398F91700130AFB /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
+		9EA71ABD2398F96800130AFB /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = Tsuikaban/GameViewController.swift; sourceTree = SOURCE_ROOT; };
+		9EA71ABE2398F96800130AFB /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Board.swift; path = Tsuikaban/Board.swift; sourceTree = SOURCE_ROOT; };
+		9EA71ABF2398F96800130AFB /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Level.swift; path = Tsuikaban/Level.swift; sourceTree = SOURCE_ROOT; };
+		9EA71AC02398F96900130AFB /* LevelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelsViewController.swift; path = Tsuikaban/LevelsViewController.swift; sourceTree = SOURCE_ROOT; };
+		9EA71AC12398F96900130AFB /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = Tsuikaban/GameScene.swift; sourceTree = SOURCE_ROOT; };
+		9EA71AC22398F96900130AFB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameScene.sks; path = Tsuikaban/GameScene.sks; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9E1AB26E238DB15E008A2A0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9EA71A9E2398F7C000130AFB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -53,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				9E1AB273238DB15E008A2A0F /* Tsuikaban */,
+				9EA71AA22398F7C000130AFB /* Tsuikaban-TV */,
 				9E1AB272238DB15E008A2A0F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				9E1AB271238DB15E008A2A0F /* Tsuikaban.app */,
+				9EA71AA12398F7C000130AFB /* Tsuikaban-TV.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,6 +118,25 @@
 			path = Tsuikaban;
 			sourceTree = "<group>";
 		};
+		9EA71AA22398F7C000130AFB /* Tsuikaban-TV */ = {
+			isa = PBXGroup;
+			children = (
+				9EA71ABE2398F96800130AFB /* Board.swift */,
+				9EA71AC22398F96900130AFB /* GameScene.sks */,
+				9EA71AC12398F96900130AFB /* GameScene.swift */,
+				9EA71ABD2398F96800130AFB /* GameViewController.swift */,
+				9EA71ABF2398F96800130AFB /* Level.swift */,
+				9EA71AC02398F96900130AFB /* LevelsViewController.swift */,
+				9EA71AB92398F91700130AFB /* Assets.xcassets */,
+				9EA71ABA2398F91700130AFB /* levels */,
+				9EA71AA32398F7C000130AFB /* AppDelegate.swift */,
+				9EA71AAD2398F7C100130AFB /* Main.storyboard */,
+				9EA71AB22398F7C900130AFB /* LaunchScreen.storyboard */,
+				9EA71AB52398F7C900130AFB /* Info.plist */,
+			);
+			path = "Tsuikaban-TV";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -105,6 +157,23 @@
 			productReference = 9E1AB271238DB15E008A2A0F /* Tsuikaban.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9EA71AA02398F7C000130AFB /* Tsuikaban-TV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9EA71AB82398F7C900130AFB /* Build configuration list for PBXNativeTarget "Tsuikaban-TV" */;
+			buildPhases = (
+				9EA71A9D2398F7C000130AFB /* Sources */,
+				9EA71A9E2398F7C000130AFB /* Frameworks */,
+				9EA71A9F2398F7C000130AFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tsuikaban-TV";
+			productName = "Tsuikaban-TV";
+			productReference = 9EA71AA12398F7C000130AFB /* Tsuikaban-TV.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -116,6 +185,9 @@
 				ORGANIZATIONNAME = "Eugenio Tampieri";
 				TargetAttributes = {
 					9E1AB270238DB15E008A2A0F = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+					9EA71AA02398F7C000130AFB = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
 				};
@@ -134,6 +206,7 @@
 			projectRoot = "";
 			targets = (
 				9E1AB270238DB15E008A2A0F /* Tsuikaban */,
+				9EA71AA02398F7C000130AFB /* Tsuikaban-TV */,
 			);
 		};
 /* End PBXProject section */
@@ -149,6 +222,18 @@
 				9E1AB285238DB163008A2A0F /* LaunchScreen.storyboard in Resources */,
 				9E1AB279238DB15E008A2A0F /* Actions.sks in Resources */,
 				9E1AB297238FBCBC008A2A0F /* levels in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9EA71A9F2398F7C000130AFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EA71AAF2398F7C100130AFB /* Main.storyboard in Resources */,
+				9EA71AC82398F96900130AFB /* GameScene.sks in Resources */,
+				9EA71ABC2398F91700130AFB /* levels in Resources */,
+				9EA71ABB2398F91700130AFB /* Assets.xcassets in Resources */,
+				9EA71AB42398F7C900130AFB /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +253,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9EA71A9D2398F7C000130AFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EA71AC72398F96900130AFB /* GameScene.swift in Sources */,
+				9EA71AC32398F96900130AFB /* GameViewController.swift in Sources */,
+				9EA71AC62398F96900130AFB /* LevelsViewController.swift in Sources */,
+				9EA71AA42398F7C000130AFB /* AppDelegate.swift in Sources */,
+				9EA71AC52398F96900130AFB /* Level.swift in Sources */,
+				9EA71AC42398F96900130AFB /* Board.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -183,6 +281,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				9E1AB284238DB163008A2A0F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9EA71AAD2398F7C100130AFB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9EA71AAE2398F7C100130AFB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9EA71AB22398F7C900130AFB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9EA71AB32398F7C900130AFB /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -342,6 +456,46 @@
 			};
 			name = Release;
 		};
+		9EA71AB62398F7C900130AFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B6S4VJ8666;
+				INFOPLIST_FILE = "Tsuikaban-TV/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.eutampieri.Tsuikaban-TV";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.2;
+			};
+			name = Debug;
+		};
+		9EA71AB72398F7C900130AFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B6S4VJ8666;
+				INFOPLIST_FILE = "Tsuikaban-TV/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.eutampieri.Tsuikaban-TV";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -359,6 +513,15 @@
 			buildConfigurations = (
 				9E1AB28A238DB163008A2A0F /* Debug */,
 				9E1AB28B238DB163008A2A0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9EA71AB82398F7C900130AFB /* Build configuration list for PBXNativeTarget "Tsuikaban-TV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9EA71AB62398F7C900130AFB /* Debug */,
+				9EA71AB72398F7C900130AFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

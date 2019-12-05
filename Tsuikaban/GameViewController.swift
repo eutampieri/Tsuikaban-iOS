@@ -33,7 +33,7 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
     }
-
+    #if os(iOS)
     override var shouldAutorotate: Bool {
         return true
     }
@@ -49,4 +49,5 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    #endif
 }

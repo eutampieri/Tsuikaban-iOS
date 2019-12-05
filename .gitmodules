@@ -1,3 +1,6 @@
 [submodule "Tsuikaban/levels"]
 	path = Tsuikaban/levels
 	url = https://github.com/eutampieri/Tsuikaban-levels
+[submodule "Tsuikaban-TV/levels"]
+	path = Tsuikaban-TV/levels
+	url = https://github.com/MyK00L/Tsuikaban-levels
