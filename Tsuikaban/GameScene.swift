@@ -144,6 +144,7 @@ class GameScene: SKScene {
             //label.run(SKAction.fadeIn(withDuration: 2.0))
         }
     }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let numberOfTouches = CGFloat(touches.count)
@@ -153,7 +154,6 @@ class GameScene: SKScene {
         average = average / numberOfTouches
         self.firstPoint = average
         let activeCornerSize = min(self.size.width, self.size.height)*0.1
-        let demo = self.size
         if average.x < self.size.width/(-2.0) + activeCornerSize && average.y > self.size.width/(2.0) - activeCornerSize {
             // Upper left active corner, undo
             self.ignoreGesture = true
@@ -178,6 +178,12 @@ class GameScene: SKScene {
         for t in touches { average += t.location(in: self) }
         average = average / numberOfTouches
         let delta = average - self.firstPoint
+        #if os(tvOS)
+        if delta.x == 0 && delta.y == 0 {
+            self.board.undo()
+            self.renderBoard()
+        }
+        #endif
         let direction: Direction
         if abs(delta.x) > 10 || abs(delta.y) > 10 {
             let tolerance = CGFloat.pi/6.0
